@@ -23,11 +23,10 @@ priority = [priorities[i] for i in common_letters]
 
 print(sum(priority))
 
-groups_bags = [[inp[i], inp[i+1], inp[i+2]] for i in range(0, len(inp), 3)]
-
 def badge(l):
     return list(set(l[0]).intersection(set(l[1]).intersection(set(l[2]))))[0]
 
+groups_bags = [[inp[i], inp[i+1], inp[i+2]] for i in range(0, len(inp), 3)]
 group_badges = [badge(i) for i in groups_bags]
 group_priority = [priorities[i] for i in group_badges]
 

@@ -24,10 +24,7 @@ for move in moves:
     for i in range(move[0]):
         stacks[move[2]-1].append(stacks[move[1]-1].pop())
 
-top_crates = ""
-
-for stack in stacks:
-    top_crates += stack[-1]
+top_crates= "".join([i[-1] for i in stacks])
 
 print(top_crates)
 
@@ -35,9 +32,7 @@ for move in moves:
     stacks_two[move[2]-1] += stacks_two[move[1]-1][-move[0]:]
     stacks_two[move[1]-1] = stacks_two[move[1]-1][:-move[0]]
 
-top_crates_2 = ""
 
-for stack in stacks_two:
-    top_crates_2 += stack[-1]
+top_crates_2 = "".join([i[-1] for i in stacks_two])
 
 print(top_crates_2)

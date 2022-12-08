@@ -27,10 +27,10 @@ for line in inp:
     amount = int(parts[0])
 
     # Adding the size of the file to each parent folder
-    dictLoc = path
+    dict_loc = path
     for i in range(path.count("/")):
-        dir_file_size[dictLoc] += amount
-        dictLoc = dictLoc[:dictLoc.rfind("/")]
+        dir_file_size[dict_loc] += amount
+        dict_loc = dict_loc[:dict_loc.rfind("/")]
     
 folders_under_100000 = 0
 min_deleted = dir_file_size["/r"] - 40000000

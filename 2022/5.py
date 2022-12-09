@@ -1,6 +1,6 @@
 import copy
 
-with open("input-files/aoc_2022_day05_large_input.txt") as f:
+with open("input-files/day5.txt") as f:
     data = f.read()
 
 data = data.split("\n\n")
@@ -28,11 +28,11 @@ top_crates= "".join([i[-1] for i in stacks])
 
 print(top_crates)
 
-# for move in moves:
-#     stacks_two[move[2]-1] += stacks_two[move[1]-1][-move[0]:]
-#     stacks_two[move[1]-1] = stacks_two[move[1]-1][:-move[0]]
+for move in moves:
+    stacks_two[move[2]-1] += stacks_two[move[1]-1][-move[0]:]
+    stacks_two[move[1]-1] = stacks_two[move[1]-1][:-move[0]]
 
 
-# top_crates_2 = "".join([i[-1] for i in stacks_two])
+top_crates_2 = "".join([i[-1] for i in stacks_two])
 
-# print(top_crates_2)
+print(top_crates_2)

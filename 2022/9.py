@@ -3,18 +3,8 @@ with open("input-files/day9.txt") as f:
 
 inp = data.split("\n")[:-1]
 moves = [i.split(" ") for i in inp]
-head = [0,0]
-tail_1 = [0,0]
+
 snake = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
-tail_2_1 = [0,0]
-tail_2_2 = [0,0]
-tail_2_3 = [0,0]
-tail_2_4 = [0,0]
-tail_2_5 = [0,0]
-tail_2_6 = [0,0]
-tail_2_7 = [0,0]
-tail_2_8 = [0,0]
-tail_2_9 = [0,0]
 
 tail_visited_1 = set([(0, 0)])
 tail_visited_2 = set([(0, 0)])

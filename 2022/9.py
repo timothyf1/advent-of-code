@@ -4,10 +4,21 @@ with open("input-files/day9.txt") as f:
 inp = data.split("\n")[:-1]
 moves = [i.split(" ") for i in inp]
 
-snake = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+snake = [[0, 0] for i in range(10)]
 
 tail_visited_1 = set([(0, 0)])
 tail_visited_2 = set([(0, 0)])
+
+def move_head(head, move):
+    if move == "U":
+        head[1] += 1
+    elif move == "D":
+        head[1] -= 1
+    elif move == "R":
+        head[0] += 1
+    elif move == "L":
+        head[0] -= 1
+    return head
 
 def tail_adjacent(head, tail):
     if abs(head[0]-tail[0]) > 1:
@@ -45,16 +56,8 @@ def move_tail(head, tail):
 
 for move in moves:
     for j in range(int(move[1])):
-        if move[0] == "U":
-            snake[0][1] += 1
-        if move[0] == "D":
-            snake[0][1] -= 1
-        if move[0] == "R":
-            snake[0][0] += 1
-        if move[0] == "L":
-            snake[0][0] -= 1
+        snake[0] = move_head(snake[0], move[0])
 
-        # move head on tails of snake
         for i in range(1, len(snake)):
             if tail_adjacent(snake[i-1], snake[i]):
                 break

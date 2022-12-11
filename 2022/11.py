@@ -1,9 +1,9 @@
-import copy
+from copy import copy
 from math import lcm
 
 def round():
     for i in monkey_dict.keys():
-        round_start_items = copy.copy(monkey_dict[i]["items"])
+        round_start_items = copy(monkey_dict[i]["items"])
         monkey_dict[i]['inspected'] += len(round_start_items) 
         for item in round_start_items:
             old = item % div_lcm 

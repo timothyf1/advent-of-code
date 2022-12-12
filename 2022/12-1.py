@@ -6,23 +6,23 @@ def find(location):
                 return (i, j)
 
 def pos_move(pos):
-    # Returns a list of possible moves from the current location
+    # Returns a list of possible moves from the given location
     x, y = pos
     pos_moves = []
-    if x > 0 and -1 <= data_num[y][x-1] - data_num[y][x] <= 1:
+    if x > 0 and data_num[y][x-1] - data_num[y][x] <= 1:
         pos_moves.append('left')
     if x < len(data_num[y])-1:
-        if -3 <= data_num[y][x+1] - data_num[y][x] <= 1:
+        if data_num[y][x+1] - data_num[y][x] <= 1:
             pos_moves.append('right')
-    if y > 0 and -1 <= data_num[y-1][x] - data_num[y][x] <= 1:
+    if y > 0 and data_num[y-1][x] - data_num[y][x] <= 1:
         pos_moves.append('up')
     if y < len(data_num)-1:
-        if -3 <= data_num[y+1][x] - data_num[y][x] <=1:
+        if data_num[y+1][x] - data_num[y][x] <=1:
             pos_moves.append('down')
     return pos_moves
 
 def move_pos(pos, direction):
-    # Returns the new location coordinates from a given move
+    # Returns the new location coordinates from a given move and position
     x, y = pos
     if direction == 'left':
         x_move = x - 1

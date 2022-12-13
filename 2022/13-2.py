@@ -1,5 +1,4 @@
 from functools import cmp_to_key
-from locale import strcoll
 
 with open('input-files/day13.txt') as f:
     data = f.read()

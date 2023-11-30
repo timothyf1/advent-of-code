@@ -11,8 +11,8 @@ class grid():
     def __init__(self, inp):
         self.top = 0
         self.bottom = max([j[1] for i in data for j in i])
-        self.left = 500 - round(self.bottom * 1.5)
-        self.right = 500 + round(self.bottom * 1.5)
+        self.left = 500 - round(self.bottom * 1.03)
+        self.right = 500 + round(self.bottom * 1.03)
         self.grid = [['.' for j in range(self.left, self.right+1)] for i in range(self.bottom+3)]
         self.grid[-1] = ['#' for j in range(self.left, self.right+1)]
 
@@ -75,5 +75,9 @@ for line in data:
 count = 0
 while alpha.sand_drop():
     count += 1
-
+    # alpha.print_grid()
 print(count)
+
+with open('out2.txt', 'w') as f:
+    out = '\n'.join([''.join(i) for i in alpha.grid])
+    f.writelines(out)

@@ -70,6 +70,12 @@ for line in data:
 
 count = 0
 while alpha.sand_drop():
+    print(count)
+    # alpha.print_grid()
     count += 1
 
 print(count)
+
+with open('out.txt', 'w') as f:
+    out = '\n'.join([''.join(i) for i in alpha.grid])
+    f.writelines(out)

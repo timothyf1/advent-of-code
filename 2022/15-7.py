@@ -8,21 +8,21 @@ class grid():
         self.max_dist = 0
         self.y = y
         self.limit = limit
+        self.sensor_loc_dist = []
         # print(self.set_2)
         for pair in data:
             # print(f"Starting pair {pair}")
             # self.add_sensor(pair[0])
             # self.add_beacon(pair[1])
             pair_distance = self.dist(pair[0], pair[1])
+            self.sensor_loc_dist.append([pair[0], pair_distance])
             y_dist = abs(self.y - pair[0][1])
             max_x_dist = pair_distance - y_dist
             # print(f"Distance is {pair_distance}, y dist {y_dist}, max x dist {max_x_dist}")
             # self.max_dist = max(self.max_dist, pair_distance)
             self.pos_within_range_2(pair[0], max_x_dist, y_dist)
-            if len(self.set_2) <= 1:
-                return
         # print(self.set_2)
-
+        self.smallest_dist = min([i[1] for i in self.sensor_loc_dist])
         # print("Finshed creating set")
         # self.pos_within_range(data[6][0], 9)
 
@@ -80,6 +80,26 @@ class grid():
             return False
         return list(self.set_2)[0] * 4000000 + self.y
 
+    def min_y_diff(self):
+        def sensor_range(sensor):
+            dist_i = []
+            for i in [0, self.limit]:
+                dist = self.dist(sensor[0], (i, self.y))
+                if dist < sensor[1]:
+                    dist_i.append(sensor[1] - dist)
+                else:
+                    print(f"returning with sensor {sensor} at point {i, self.y}, dist {dist}")
+                    return 0
+            print("test")
+            return min(dist_i) if len(dist_i) > 0 else 0
+
+        sensors_min_y = []
+        for sensor in self.sensor_loc_dist:
+            sensors_min_y.append(sensor_range(sensor))
+        if len(sensors_min_y) == 0:
+            return 0
+        return max(sensors_min_y)
+
 if __name__ == '__main__':
     with open('input-files/day15.txt') as f:
         data = f.read()
@@ -88,8 +108,10 @@ if __name__ == '__main__':
     data = [i.split() for i in data]
 
     data = [[(int(i[2][2:]), int(i[3][2:])), (int(i[8][2:]), int(i[9][2:]))] for i in data]
-
-    for i in range(2310, 4000000):
+    skip = set()
+    for i in range(4000000):
+        if i in skip:
+            continue
         # print("------------------------------------------------")
         # print("------------------------------------------------")
         print("------------------------------------------------")
@@ -98,6 +120,10 @@ if __name__ == '__main__':
         row_result = alpha.find_point()
         if row_result == False:
             print(f"Row {i} does not have the location required")
+            num_to_skip = alpha.min_y_diff()
+            print(f"Rows to skipt {num_to_skip}")
+            skip = skip.union(set(range(i, i + num_to_skip + 1)))
+            # print(skip)
         else:
             print(row_result)
             break
